@@ -48,6 +48,27 @@ namespace LinkedList
                 }
                 Console.WriteLine("null");
             }
+            public void Remove(int data)
+            {
+                if (head == null) return;
+
+                if (head.Data == data)
+                {
+                    head = head.Next;
+                    return;
+                }
+
+                Node current = head;
+                while (current.Next != null && current.Next.Data != data)
+                {
+                    current = current.Next;
+                }
+
+                if (current.Next != null)
+                {
+                    current.Next = current.Next.Next;
+                }
+            }
         }
 
         static void Main(string[] args)
@@ -56,7 +77,9 @@ namespace LinkedList
             list.Add(10);
             list.Add(20);
             list.Add(30);
+            list.Remove(10);
             list.Print();
+            
         }
     }
 }
