@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LinkedList
@@ -69,17 +70,45 @@ namespace LinkedList
                     current.Next = current.Next.Next;
                 }
             }
-        }
+            public void Clear()
+            {
+                head = null;
+            }
+            public void Sort()
+            {
+                if (head == null || head.Next == null) return;
+                Node current = head;
+                Node index = null;
+                int temp;
+                while (current != null)
+                {
+                    index = current.Next;
+                    while (index != null)
+                    {
+                        if (current.Data > index.Data)
+                        {
+                            temp = current.Data;
+                            current.Data = index.Data;
+                            index.Data = temp;
+                        }
+                        index = index.Next;
+                    }
+                    current = current.Next;
+                }
+            }
+            static void Main(string[] args)
+            {
+                LinkedList list = new LinkedList();
+                list.Add(50);
+                list.Add(40);
+                list.Add(30);
+                list.Add(20);
+                list.Add(10);
+                list.Sort();
+                list.Remove(30);
+                list.Print();
 
-        static void Main(string[] args)
-        {
-            LinkedList list = new LinkedList();
-            list.Add(10);
-            list.Add(20);
-            list.Add(30);
-            list.Remove(10);
-            list.Print();
-            
+            }
         }
     }
 }
